@@ -106,7 +106,10 @@ public class LoveApp {
         return loveReport;
     }
 
-    @Autowired
+    @Resource
+    private VectorStore loveAppVectorStore;
+
+    @Resource
     private VectorStore pgVectorVectorStore;
 
     @Resource
@@ -124,9 +127,9 @@ public class LoveApp {
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 //启用本地内存RAG知识库问答
-//                .advisors(QuestionAnswerAdvisor.builder(loveAppVectorStore).build())
+                .advisors(QuestionAnswerAdvisor.builder(loveAppVectorStore).build())
                 //启用云知识库问答
-                .advisors(loveAppCloudAdvisor)
+//                .advisors(loveAppCloudAdvisor)
                 //启用RAG检索增强(基于PgVector向量存储)
 //                .advisors(QuestionAnswerAdvisor.builder(pgVectorVectorStore).build())
                 .call()

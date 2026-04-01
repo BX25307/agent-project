@@ -23,14 +23,15 @@ public class LoveAppVectorStoreConfig {
     @Resource
     private LoveAppDocumentLoader loader;
 
+    @Resource
+    private MyKeywordEnricher myKeywordEnricher;
     @Bean
     VectorStore loveAppVectorStore(EmbeddingModel embeddingModel){
         SimpleVectorStore simpleVectorStore = SimpleVectorStore.builder(embeddingModel).build();
         List<Document> documents = loader.loadMarkdown();
-        for (int i = 0; i < documents.size(); i += DASHSCOPE_EMBEDDING_BATCH_SIZE) {
-            int end = Math.min(i + DASHSCOPE_EMBEDDING_BATCH_SIZE, documents.size());
-            simpleVectorStore.add(new ArrayList<>(documents.subList(i, end)));
-        }
+        //自动补充关键词元信息
+        List<Document> enricherDocuments = myKeywordEnricher.enricherDocuments(documents);
+        simpleVectorStore.add(enricherDocuments);
         return simpleVectorStore;
     }
 }
