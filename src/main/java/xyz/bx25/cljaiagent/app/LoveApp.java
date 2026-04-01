@@ -21,6 +21,8 @@ import xyz.bx25.cljaiagent.advisor.MyLoggerAdvisor;
 import xyz.bx25.cljaiagent.advisor.ReReadingAdvisor;
 import xyz.bx25.cljaiagent.memory.FileBasedChatMemoryRepository;
 import xyz.bx25.cljaiagent.rag.LoveAppCloudAdvisorConfig;
+import xyz.bx25.cljaiagent.rag.LoveAppRagCustomAdvisorFactory;
+import xyz.bx25.cljaiagent.rag.QueryRewriter;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -115,6 +117,8 @@ public class LoveApp {
     @Resource
     private Advisor loveAppCloudAdvisor;
 
+    @Resource
+    private QueryRewriter queryRewriter;
     /**
      * 和RAG知识库对话
      * @param message
@@ -122,16 +126,24 @@ public class LoveApp {
      * @return
      */
     public String doChatWithRag(String message,String chatId){
+//        String rewriterMessage = queryRewriter.doQueryRewriter(message);
         ChatResponse chatResponse = chatClient.prompt()
+                //执行改写后的查询
                 .user(message)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 //启用本地内存RAG知识库问答
-                .advisors(QuestionAnswerAdvisor.builder(loveAppVectorStore).build())
+//                .advisors(QuestionAnswerAdvisor.builder(loveAppVectorStore).build())
                 //启用云知识库问答
 //                .advisors(loveAppCloudAdvisor)
                 //启用RAG检索增强(基于PgVector向量存储)
 //                .advisors(QuestionAnswerAdvisor.builder(pgVectorVectorStore).build())
+                //自定义增强检索
+                .advisors(
+                        LoveAppRagCustomAdvisorFactory.createRagCustomAdvisor(
+                                loveAppVectorStore,"单身"
+                        )
+                )
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
