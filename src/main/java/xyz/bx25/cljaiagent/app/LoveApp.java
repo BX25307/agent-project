@@ -14,6 +14,7 @@ import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MimeTypeUtils;
 import xyz.bx25.cljaiagent.advisor.MyLoggerAdvisor;
@@ -105,9 +106,8 @@ public class LoveApp {
         return loveReport;
     }
 
-    //知识库问答功能
-    @Resource
-    private VectorStore simpleVectorStore;
+    @Autowired
+    private VectorStore pgVectorVectorStore;
 
     @Resource
     private Advisor loveAppCloudAdvisor;
@@ -123,8 +123,12 @@ public class LoveApp {
                 .user(message)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
-//                .advisors(QuestionAnswerAdvisor.builder(simpleVectorStore).build())
+                //启用本地内存RAG知识库问答
+//                .advisors(QuestionAnswerAdvisor.builder(loveAppVectorStore).build())
+                //启用云知识库问答
                 .advisors(loveAppCloudAdvisor)
+                //启用RAG检索增强(基于PgVector向量存储)
+//                .advisors(QuestionAnswerAdvisor.builder(pgVectorVectorStore).build())
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
