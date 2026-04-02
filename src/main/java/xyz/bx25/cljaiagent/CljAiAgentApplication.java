@@ -1,6 +1,5 @@
 package xyz.bx25.cljaiagent;
 
-import org.springframework.ai.vectorstore.pgvector.PgVectorStore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;

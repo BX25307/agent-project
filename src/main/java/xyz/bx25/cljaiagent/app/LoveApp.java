@@ -13,6 +13,7 @@ import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -111,8 +112,8 @@ public class LoveApp {
     @Resource
     private VectorStore loveAppVectorStore;
 
-    @Resource
-    private VectorStore pgVectorVectorStore;
+//    @Resource
+//    private VectorStore pgVectorVectorStore;
 
     @Resource
     private Advisor loveAppCloudAdvisor;
@@ -139,11 +140,11 @@ public class LoveApp {
                 //启用RAG检索增强(基于PgVector向量存储)
 //                .advisors(QuestionAnswerAdvisor.builder(pgVectorVectorStore).build())
                 //自定义增强检索
-                .advisors(
-                        LoveAppRagCustomAdvisorFactory.createRagCustomAdvisor(
-                                loveAppVectorStore,"单身"
-                        )
-                )
+//                .advisors(
+//                        LoveAppRagCustomAdvisorFactory.createRagCustomAdvisor(
+//                                loveAppVectorStore,"单身"
+//                        )
+//                )
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
@@ -151,4 +152,20 @@ public class LoveApp {
         return content;
     }
 
+    @Resource
+    private ToolCallback[] allTools;
+
+    public String doChatWithTools(String msg,String chatId){
+        ChatResponse chatResponse = chatClient.prompt()
+                .user(msg)
+                .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
+                        .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
+                .advisors(new MyLoggerAdvisor())
+                .toolCallbacks(allTools)
+                .call()
+                .chatResponse();
+        String content = chatResponse.getResult().getOutput().getText();
+        log.info("content:{}",content);
+        return content;
+    }
 }

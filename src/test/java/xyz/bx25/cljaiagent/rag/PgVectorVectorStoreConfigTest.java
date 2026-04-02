@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * @Author bx25 小陈
  * @Date 2026/4/1 13:58
  */
-@SpringBootTest
+//@SpringBootTest
 class PgVectorVectorStoreConfigTest {
 
-    @Resource
+//    @Resource
     private VectorStore pgVectorVectorStore;
 
-    @Test
+//    @Test
     void pgVectorVectorStore() {
 // Retrieve documents similar to a query
         List<Document> results = pgVectorVectorStore.similaritySearch(SearchRequest.builder().query("单身").topK(5).build());
