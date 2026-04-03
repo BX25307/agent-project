@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cli-image-search-mcp-server
+  profiles:
+    active: sse
+    include: local
+server:
+  port: 8866

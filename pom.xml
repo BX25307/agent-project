@@ -126,7 +126,11 @@
             <artifactId>font-asian</artifactId>
             <version>9.6.0</version>
         </dependency>
-
+        <!--Spring AI MCP配置-->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-client</artifactId>
+        </dependency>
         <!-- jsoup HTML parser library @ https://jsoup.org/ -->
         <dependency>
             <groupId>org.jsoup</groupId>

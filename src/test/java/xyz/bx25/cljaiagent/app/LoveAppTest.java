@@ -48,4 +48,12 @@ class LoveAppTest {
         String answer = loveApp.doChatWithTools(message, chatId);
         Assertions.assertNotNull(answer);
     }
+
+    @Test
+    void doChatWithMCP(){
+        String chatId = UUID.randomUUID().toString();
+        String message="帮我搜索一些哄另一半开心的图片，我要链接!!!";
+        String answer = loveApp.doChatWithMCP(message, chatId);
+        System.out.println(answer);
+    }
 }

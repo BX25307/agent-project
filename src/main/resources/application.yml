@@ -4,6 +4,15 @@ spring:
       clj-ai-agent
   profiles:
     active: local
+  ai:
+    mcp:
+      client:
+        #stdio:
+          #servers-configuration: classpath:mcp-servers.json
+        sse:
+          connections:
+            server1:
+              url: http://localhost:8866
 server:
   port: 8092
   servlet:
