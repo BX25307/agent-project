@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoveAppChatView from '../views/LoveAppChatView.vue'
 import EternityManusChatView from '../views/EternityManusChatView.vue'
+import WhisperNestChatView from '../views/WhisperNestChatView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/eternity-manus',
       name: 'eternity-manus',
       component: EternityManusChatView
+    },
+    {
+      path: '/whisper-nest',
+      name: 'whisper-nest',
+      component: WhisperNestChatView
     }
   ]
 })

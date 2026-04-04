@@ -10,6 +10,7 @@ const welcomeText =
     title="EternityManus"
     endpoint="/ai/eternity_manus/emitter"
     assistant-stream-mode="steps"
+    :stream-timeout-enabled="false"
     :welcome-text="welcomeText"
   />
 </template>

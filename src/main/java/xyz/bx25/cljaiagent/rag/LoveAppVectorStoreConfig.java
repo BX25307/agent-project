@@ -16,7 +16,7 @@ import java.util.List;
  * @Author bx25 小陈
  * @Date 2026/3/31 11:45
  */
-@Configuration
+//@Configuration
 public class LoveAppVectorStoreConfig {
     private static final int DASHSCOPE_EMBEDDING_BATCH_SIZE = 10;
 
@@ -25,7 +25,7 @@ public class LoveAppVectorStoreConfig {
 
     @Resource
     private MyKeywordEnricher myKeywordEnricher;
-    @Bean
+//    @Bean
     VectorStore loveAppVectorStore(EmbeddingModel embeddingModel){
         SimpleVectorStore simpleVectorStore = SimpleVectorStore.builder(embeddingModel).build();
         List<Document> documents = loader.loadMarkdown();

@@ -114,8 +114,9 @@ public abstract class BaseAgent {
                     log.info("Executing step " + currentStep + "/" + maxStep);
 
                     String stepRes = step();
-                    String res = "Step " + currentStep + ": " + stepRes;
-                    sseEmitter.send(res);
+                    if (StringUtils.isNotBlank(stepRes)) {
+                        sseEmitter.send(stepRes);
+                    }
                 }
 
                 if (currentStep >= maxStep) {

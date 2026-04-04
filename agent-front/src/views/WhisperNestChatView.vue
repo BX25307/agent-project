@@ -11,17 +11,16 @@ function extraParams() {
   }
 }
 
-const title = 'Love Assistant'
 const welcomeText =
-  '\u4f60\u597d\uff0c\u6211\u53ef\u4ee5\u5e2e\u4f60\u5206\u6790\u604b\u7231\u6c9f\u901a\u3001\u8868\u8fbe\u65b9\u5f0f\u548c\u4e92\u52a8\u7b56\u7565\u3002'
+  '\u4f60\u597d\uff0c\u6211\u662f WhisperNest\uff0c\u53ef\u4ee5\u966a\u4f60\u68b3\u7406\u60c5\u7eea\uff0c\u4e5f\u53ef\u4ee5\u5b89\u9759\u542c\u4f60\u503e\u8bc9\u3002'
 </script>
 
 <template>
   <ChatShell
-    :title="title"
-    endpoint="/ai/love_app/chat/emitter"
+    title="WhisperNest"
+    endpoint="/ai/whisper_nest/chat/emitter"
     :extra-params="extraParams"
-    theme="love"
+    theme="whisper"
     :welcome-text="welcomeText"
   />
 </template>

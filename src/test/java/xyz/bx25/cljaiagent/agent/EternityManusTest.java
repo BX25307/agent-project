@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -25,7 +27,8 @@ class EternityManusTest {
                 并以 PDF 格式输出,
                 要求用中文,
                 同时图片也要显示出来""";
-      String answer = manus.run(userPrompt);
+      String chatId = UUID.randomUUID().toString();
+      String answer = manus.run(userPrompt,chatId);
       Assertions.assertNotNull(answer);
    }
 }

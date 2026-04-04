@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Author bx25 小陈
  * @Date 2026/4/1 18:53
  */
-@Component
+//@Component
 public class QueryRewriter {
 
     private final QueryTransformer queryTransformer;

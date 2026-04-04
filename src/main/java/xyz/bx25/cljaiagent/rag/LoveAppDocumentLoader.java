@@ -16,7 +16,7 @@ import java.util.List;
  * @Author bx25 小陈
  * @Date 2026/3/31 11:26
  */
-@Component
+//@Component
 @Slf4j
 public class LoveAppDocumentLoader {
 
