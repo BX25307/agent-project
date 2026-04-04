@@ -5,11 +5,13 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ImageSearchTool {
     @Value("${pexels.api-key}")
@@ -19,6 +21,7 @@ public class ImageSearchTool {
 
     @Tool(description = "Search image from web")
     public String imageSearch(@ToolParam(description = "search query keyword") String searchTopic) {
+        log.info("Search image from web");
         try {
             HttpResponse response = HttpRequest.get(PEXELS_SEARCH_URL)
                     .header("Authorization", pexelsApiKey)

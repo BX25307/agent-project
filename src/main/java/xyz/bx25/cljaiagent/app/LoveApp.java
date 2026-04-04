@@ -19,6 +19,7 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MimeTypeUtils;
+import reactor.core.publisher.Flux;
 import xyz.bx25.cljaiagent.advisor.MyLoggerAdvisor;
 import xyz.bx25.cljaiagent.advisor.ReReadingAdvisor;
 import xyz.bx25.cljaiagent.memory.FileBasedChatMemoryRepository;
@@ -69,6 +70,21 @@ public class LoveApp {
 //                        ,new ReReadingAdvisor()
                 )
                 .build();
+    }
+
+    /**
+     * AI对话方法(支持多轮对话) SSE调用
+     * @param msg
+     * @param chatId
+     * @return
+     */
+    public Flux<String> doChatByStream(String msg, String chatId){
+        return chatClient.prompt()
+                .user(msg)
+                .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId))
+                .stream()
+                .content();
+
     }
 
     /**
