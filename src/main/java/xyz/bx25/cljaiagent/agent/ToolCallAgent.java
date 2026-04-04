@@ -119,7 +119,7 @@ public class ToolCallAgent extends ReActAgent{
             setState(AgentState.FINISHED);
         }
         String results = toolResponseMessage.getResponses().stream()
-                .map(toolResponse -> "工具 " + toolResponse.name() + " 完成了它的任务!结果：" + toolResponse.responseData())
+                .map(toolResponse -> "工具 " + toolResponse.name() + " 完成了它的任务!")
                 .collect(Collectors.joining("\n"));
         log.info(results);
         return results;
