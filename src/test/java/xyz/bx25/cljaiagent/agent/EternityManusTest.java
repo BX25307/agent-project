@@ -28,7 +28,7 @@ class EternityManusTest {
                 要求用中文,
                 同时图片也要显示出来""";
       String chatId = UUID.randomUUID().toString();
-      String answer = manus.run(userPrompt,chatId);
+      String answer = manus.run(userPrompt);
       Assertions.assertNotNull(answer);
    }
 }

@@ -7,8 +7,8 @@ spring:
   ai:
     mcp:
       client:
-        #stdio:
-          #servers-configuration: classpath:mcp-servers.json
+        stdio:
+          servers-configuration: classpath:mcp-servers.json
         sse:
           connections:
             server1:

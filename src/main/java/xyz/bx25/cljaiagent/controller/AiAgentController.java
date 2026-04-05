@@ -40,23 +40,23 @@ public class AiAgentController {
     /**
      * Returns a synchronous LoveApp response.
      */
-    @GetMapping("love_app.chat/sync")
-    public String doChatWithLoveAppSync(String message, String chatId) {
-        return loveApp.doChat(message, chatId);
-    }
+//    @GetMapping("love_app.chat/sync")
+//    public String doChatWithLoveAppSync(String message, String chatId) {
+//        return loveApp.doChat(message, chatId);
+//    }
 
-    @GetMapping(value = "/love_app/chat/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> doChatWithLoveAppSse(String message, String chatId) {
-        return loveApp.doChatByStream(message, chatId);
-    }
-
-    @GetMapping("/lova_app/chat/server_sent_event")
-    public Flux<ServerSentEvent<String>> doChatWithLoveAppServerSentEvent(String message, String chatId) {
-        return loveApp.doChatByStream(message, chatId)
-                .map(chunk -> ServerSentEvent.<String>builder()
-                        .data(chunk)
-                        .build());
-    }
+//    @GetMapping(value = "/love_app/chat/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+//    public Flux<String> doChatWithLoveAppSse(String message, String chatId) {
+//        return loveApp.doChatByStream(message, chatId);
+//    }
+//
+//    @GetMapping("/lova_app/chat/server_sent_event")
+//    public Flux<ServerSentEvent<String>> doChatWithLoveAppServerSentEvent(String message, String chatId) {
+//        return loveApp.doChatByStream(message, chatId)
+//                .map(chunk -> ServerSentEvent.<String>builder()
+//                        .data(chunk)
+//                        .build());
+//    }
 
     @GetMapping("/love_app/chat/emitter")
     public SseEmitter doChatWithLoveAppEmitter(String message, String chatId) {

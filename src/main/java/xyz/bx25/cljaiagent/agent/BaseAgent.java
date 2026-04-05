@@ -149,7 +149,7 @@ public abstract class BaseAgent {
                 this.state = AgentState.FINISHED;
             }
             this.cleanUp();
-            log.info("SSE connection completed");
+            log.info("MCP connection completed");
         });
 
         return sseEmitter;

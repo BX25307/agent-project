@@ -1,0 +1,17 @@
+spring:
+  application:
+    name:
+      clj-ai-agent
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY:}
+      chat:
+        options:
+          model: qwen-plus-latest
+#  datasource:
+#    url: jdbc:postgresql://rm-cn-d4h4pxrvy0002pko.rwlb.rds.aliyuncs.com:5432/clj_ai_agent
+#    username: my_user
+#    password: "Chenlijin12345"
+
+searchapi:
+  api-key: ${SEARCHAPI_API_KEY:}
