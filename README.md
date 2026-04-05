@@ -2,6 +2,11 @@
 
 <span style="color:#27AE60">一个基于 Spring Boot 3.5（Java 21）的 AI Agent 后端项目</span>，内置 MCP 客户端能力，并包含一个独立的图片搜索 MCP Server。
 
+<span style="color:#E67E22">项目介绍（智能体用途）</span>：
+- <span style="color:#16A085">LoveApp</span> 💘：恋爱陪伴与情感建议型智能体，强调温柔、共情、可对话的关系指导。
+- <span style="color:#16A085">WhisperNest</span> 🌙：情绪陪伴型智能体，倾向安抚与倾听，提供安全、轻柔的情绪支持。
+- <span style="color:#16A085">EternityManus</span> 🧭：参考 Manus 的设计方法，强调工具调用与可编排的任务执行，输出清晰的中文结果。
+
 ---
 
 ## <span style="color:#8E44AD">🌟 项目功能概览</span>
